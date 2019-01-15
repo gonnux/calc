@@ -1,6 +1,3 @@
-
-const cacheName = 'calc-local';
-
 const staticAssets = [
   './',
   './index.html',
@@ -8,44 +5,31 @@ const staticAssets = [
   './css/app.css',
   './js/materialize.min.js',
   './css/materialize.min.css',
-];
+]
 
 self.addEventListener('install', async function () {
-  const cache = await caches.open(cacheName);
-  cache.addAll(staticAssets);
-});
+  const cache = await caches.open('calc')
+  cache.addAll(staticAssets)
+})
 
 self.addEventListener('activate', event => {
-  event.waitUntil(self.clients.claim());
-});
+  event.waitUntil(self.clients.claim())
+})
 
 self.addEventListener('fetch', event => {
   const request = event.request;
-  const url = new URL(request.url);
-  if (url.origin === location.origin) {
-    event.respondWith(localFetch(request));
-  } else {
-    event.respondWith(remoteFetch(request));
-  }
-});
+  const url = new URL(request.url)
+  event.respondWith(cachingFetch(request))
+})
 
-async function localFetch(request) {
+async function cachingFetch(request) {
+  const cache = await caches.open('calc');
   try {
-    return await fetch(request)
-  } catch {
-    return await caches.match(request);
-  }
-}
-
-async function remoteFetch(request) {
-  const cache = await caches.open('calc-remote');
-  try {
-    const response = await fetch(request);
-    cache.put(request, response.clone());
-    return response;
-  } catch (err) {
-    console.log('remote fetch failed')
-    const response = await cache.match(request);
-    return response || '';
+    const response = await fetch(request)
+    cache.put(request, response.clone())
+    return response
+  } catch(err) {
+    console.log(err)
+    return await caches.match(request)
   }
 }
