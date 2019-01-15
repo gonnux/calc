@@ -3,7 +3,7 @@ if('serviceWorker' in navigator) {
     navigator.serviceWorker.register('serviceWorker.js')
       .then(registration => console.log('Service Worker registered'))
       .catch(err => console.log('Service Worker registration failed'))
-  );
+  )
 }
 
 function getInput(eventTarget) {
@@ -49,6 +49,9 @@ function getInput(eventTarget) {
 
 window.addEventListener('load', () => {
   const display = document.getElementById('display')
+  const message = document.getElementById('message')
+  if(!'serviceWorker' in navigator)
+    message.style.display = 'block'
   display.dataset.data = ''
   document.addEventListener('click', (event) => {
     let input = getInput(event.target)
