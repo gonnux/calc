@@ -36,6 +36,8 @@ function getInput(eventTarget) {
     input = '*'
   else if(eventTarget.matches('#button-divide'))
     input = '/'
+  else if(eventTarget.matches('#button-modulo'))
+    input = '%'
   else if(eventTarget.matches('#button-dot'))
     input = '.'
   else if(eventTarget.matches('#button-clear'))
