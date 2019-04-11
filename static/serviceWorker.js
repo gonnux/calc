@@ -1,10 +1,8 @@
 const staticAssets = [
   './',
   './index.html',
-  './js/app.js',
-  './css/app.css',
-  './js/materialize.min.js',
-  './css/materialize.min.css',
+  './main.js',
+  './main.css',
 ]
 
 self.addEventListener('install', async function () {
