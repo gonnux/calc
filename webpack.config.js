@@ -42,6 +42,14 @@ module.exports = {
          }
        },
        {
+         test: /\.css$/,  
+         use: [
+           MiniCssExtractPlugin.loader,
+           'css-loader',
+           'postcss-loader'
+         ]
+       },
+       {
          test: /\.scss$/,
          use: [
            MiniCssExtractPlugin.loader,
@@ -56,14 +64,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       'template': './src/index.html',
       'filename': './index.html',
-      'meta': {
-        'viewport': 'width=device-width, initial-scale=1, shrink-to-fit=no',
-        'theme-color': '#FF0000',
-        'charset': 'UTF-8'
-      },
     }),
     new CopyWebpackPlugin([
-      {from: 'asset', to: 'asset'}
+      {from: 'static', to: ''}
     ]),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
