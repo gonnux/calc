@@ -21,7 +21,6 @@ module.exports = {
         exclude: /node_modules/,
         loader: "eslint-loader"
        },
-       
        {
          test: /\.js$/,
          include: path.join(__dirname),
@@ -64,6 +63,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       'template': './src/index.html',
       'filename': './index.html',
+       minify: {
+         collapseWhitespace: true,
+         minifyJS: true,
+         minifyCSS: true
+       }
     }),
     new CopyWebpackPlugin([
       {from: 'static', to: ''}
