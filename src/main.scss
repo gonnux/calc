@@ -1,0 +1,21 @@
+body {
+  max-width:100%;
+  overflow-x: hidden
+}
+
+#display-wrapper {
+  min-width: 100%;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+#display {
+  background-color: grey;
+  color: white;
+  word-wrap: break-word;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
